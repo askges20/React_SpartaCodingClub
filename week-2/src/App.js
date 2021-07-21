@@ -11,7 +11,7 @@ class App extends React.Component{
     super(props);
     this.state = {
       name: "스파르타 코딩 클럽",
-      page: "quiz", //조건부 렌더링에 사용
+      page: "score", //조건부 렌더링에 사용
       scoreMsg: "이 정도면 아주 친한 친구 사이! 앞으로도 더 친하게 지내요! :)",
       list: [
         { question: "르탄이는 2살이다.", answer: "O" },

@@ -1,15 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { useSelector, useDispatch } from 'react-redux';
+
 const BucketList = (props) => {
-    const my_lists = props.list;
-    console.log(props);
+    const bucket_list = useSelector(state => state.bucket.list);    //버킷리스트를 리액트 훅으로 가져오기
+    
     return (
         <ListStyle>
             {
-                my_lists.map((list, index) => {
-                    console.log(list);
-                    return (<ItemStyle key={index}>{list}</ItemStyle>);
+                bucket_list.map((list, index) => {
+                    return (
+                    <ItemStyle
+                        className="list_item"
+                        key={index}
+                        onClick={() => {
+                            props.history.push('/detail/'+index);   //몇 번째 항목을 눌렀는지 url 파라미터로 넘기기
+                        }}
+                    >
+                        {list}
+                    </ItemStyle>);
                 })
             }
         </ListStyle>

@@ -1,15 +1,40 @@
 import React from 'react';
-import './App.css';
+
+import { withRouter } from 'react-router';
+import { Route, Switch } from 'react-router-dom';
+
 import BucketList from './BucketList';
-import './style.css';
 import styled from 'styled-components';
+import Detail from './Detail';
+import NotFound from './NotFound';
+
+import { connect } from 'react-redux';
+import { loadBucket, createBucket  } from './redux/modules/bucket';
+
+//스토어가 가진 상태값을 props로 받아오는 함수
+const mapStateToProps = (state) => {
+  return {bucket_list: state.bucket.list};
+}
+
+//상태 값을 변화시키기 위한 액션 생성 함수를 props로 받아오기 위한 함수
+const mapDispatchToProps = (dispatch) => {
+  return{
+    load: () => {
+      dispatch(loadBucket());
+    },
+
+    create: (bucket) => {
+      dispatch(createBucket(bucket));
+    }
+  }
+}
 
 
 class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      list: ['영화관 가기', '매일 책읽기', '수영 배우기']
+
     };
 
     this.text = React.createRef();
@@ -21,10 +46,8 @@ class App extends React.Component {
   }
 
   addBucketList = () => {
-    let list = this.state.list;
     const new_item = this.text.current.value;
-
-    this.setState({list:[...list, new_item]});
+    this.props.create(new_item);
   }
 
   render() {
@@ -33,7 +56,21 @@ class App extends React.Component {
         <Container>
           <Title>내 버킷리스트</Title>
           <Line/>
-          <BucketList list={this.state.list}/>
+          <Switch>
+            <Route
+              exact path="/"
+              render={(props) => 
+                (<BucketList
+                    list={this.props.bucket_list}
+                    history={this.props.history}
+                  />
+                )}
+            />
+            {/*BucketList list={this.state.list}/>*/}
+
+            <Route exact path="/detail/:index" component={Detail}/>
+            <Route render={(props) => (<NotFound history={props.history}/>)}/>
+          </Switch>
         </Container>
         <Input>
           <input type="text" ref={this.text}/>
@@ -74,4 +111,4 @@ const Line = styled.hr`
   border:1px dotted #ddd;
 `;
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App));
