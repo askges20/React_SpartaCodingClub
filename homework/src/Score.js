@@ -1,24 +1,53 @@
 import React from "react";
 import styled from "styled-components";
 
+import { useSelector, useDispatch } from "react-redux";
+import { addRank } from './redux/modules/rank';
+
 const Score = (props) => {
-  //컬러셋 참고: https://www.shutterstock.com/ko/blog/pastel-color-palettes-rococo-trend/
+  const name = useSelector((state) => state.quiz.name);
+  const score_texts = useSelector((state) => state.quiz.score_texts);
+  const answers = useSelector((state) => state.quiz.answers);
+
+  //정답 걸러내기
+  let correct = answers.filter((answer) => {
+    return answer;
+  });
+
+  //점수 계산
+  let score = (correct.length / answers.length) * 100;
+
+  let score_text = "";
+
+  Object.keys(score_texts).map((s, idx) => {
+    //첫번째 텍스트 넣기
+    if (idx == 0) {
+      score_text = score_texts[s];
+    }
+    //실제 점수와 기준 점수 비교
+    score_text = parseInt(s) <= score ? score_texts[s] : score_text;
+  });
+
   return (
     <ScoreContainer>
-      
         <Text>
-          <span>{props.name}</span>
+          <span>{name}</span>
           퀴즈에 <br />
           대한 내 점수는?
         </Text>
         <MyScore>
-          <span>100</span>점
-          <p>{props.scoreMsg}</p>
+          <span>{score}</span>점
+          <p>{score_text}</p>
         </MyScore>
 
-        {/* <Button>다시 하기</Button> */}
-        <Button outlined>랭킹보기</Button>
-      
+        <Button
+          onClick={() => {
+            props.history.push('/message');
+          }}
+          outlined
+        >
+          {name}에게 한마디
+        </Button>
     </ScoreContainer>
   );
 };

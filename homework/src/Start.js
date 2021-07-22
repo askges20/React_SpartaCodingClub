@@ -1,7 +1,13 @@
 import React from 'react';
 import img from "./scc_img01.png";
+import { useDispatch, useSelector } from 'react-redux';
+import { addUserName } from './redux/modules/rank';
 
 const Start = (props) => {
+    const dispatch = useDispatch();
+    const name = useSelector((state) => state.quiz.name);
+    const input_text = React.useRef(null);
+
     return (
         <div style={{
             display: "flex",
@@ -34,11 +40,12 @@ const Start = (props) => {
                                 padding:"5px 10px",
                                 borderRadius:"30px",
                             }}>
-                            {props.name /* App.js의 state를 받아와서 사용 */}
+                            {name}
                         </span>
                         에 대해 얼마나 알고 있을까?
                     </h1>
                     <input
+                        ref = {input_text}
                         type="text"
                         style={{
                             padding:"10px",
@@ -50,6 +57,10 @@ const Start = (props) => {
                         placeholder="내 이름"
                     />
                     <button
+                        onClick = {() => {
+                            dispatch(addUserName(input_text.current.value));    //이름 저장
+                            props.history.push('/quiz');    //페이지 이동
+                        }}
                         style={{
                             padding:"8px 24px",
                             backgroundColor: "#dadafc",

@@ -1,20 +1,31 @@
 import React from "react";
 import styled from "styled-components";
-import img from "./scc_img01.png";
-import TinderCard from "react-tinder-card";
+import Score from './Score';
 import SwipeItem from "./SwipeItem";
 
+import { useSelector, useDispatch } from 'react-redux';
+import { addAnswer } from './redux/modules/quiz';
+
 const Quiz = (props) => {
-  console.log(props);
-  const [num, setNum] = React.useState(0);  //현재 문제 번호(인덱스)
+  const dispatch = useDispatch();
+  const answers = useSelector((state) => state.quiz.answers);
+  const quiz = useSelector((state) => state.quiz.quiz);
+  
+  const num = answers.length;
 
   const onSwipe = (direction) => {  //스와이프 했을 때
-    console.log("You swiped: " + direction);
-    setNum(num + 1);
+    let _answer = direction === "left" ? "O" : "X";
+
+    if(_answer === quiz[num].answer){ //정답이면
+      dispatch(addAnswer(true));
+    }
+    else {  //오답이면
+      dispatch(addAnswer(false));
+    }
   };
 
-  if (num > 10) { //모든 퀴즈를 풀었을 때
-    return <div>퀴즈 끝!</div>;
+  if (num > quiz.length - 1) { //모든 퀴즈를 풀었을 때
+    return <Score {...props}/>;
   }
 
   return (
@@ -22,7 +33,7 @@ const Quiz = (props) => {
       <p>
         <span>{num + 1}번 문제</span>
       </p>
-      {props.list.map((l, idx) => {
+      {quiz.map((l, idx) => {
         if (num === idx) {
           return <Question key={idx}>{l.question}</Question>;
         }
@@ -33,7 +44,7 @@ const Quiz = (props) => {
         <Answer>{" X"}</Answer>
       </AnswerZone>
 
-      {props.list.map((l, idx) => {
+      {quiz.map((l, idx) => {
         if (idx === num) {
           return <SwipeItem key={idx} onSwipe={onSwipe} />;
         }
