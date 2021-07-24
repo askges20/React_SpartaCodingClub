@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+<h2>4주차 강의 : Styled Components의 keyframes 예제</h2>
+<p>Styled Components 라이브러리의 keyframes를 이용하여 animation 적용</p>
+  
+[작성한 코드(App.js)](./src/App.js)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/75527311/126878780-0417f8d3-7f49-4ab6-bb73-4b2e4f2395a8.gif" width="300"/>
+</div>
+  
+</p>
+<hr/>
 
-## Available Scripts
+<h3>styled-components 패키지 설치하기</h3>
+<pre><code>yarn add styled-components
+</code></pre>
 
-In the project directory, you can run:
+<h3>App.js</h3>
+<pre><code>import styled, {keyframes} from 'styled-components';
+const move = keyframes\`
+  0%{
+    top: 20px;
+    opacity: 1;
+    left: 20px;
+    background-color: green;
+  }
+  30%{
+    top: 50px;
+    background-color: orange;
+  }
+  50%{
+    top: 200px;
+    opacity: 0;
+    left: 200px;
+  }
+  80%{
+    top: 150px;
+  }
+  100%{
+    top:20px;
+    opacity: 1;
+    left:20px;
+    background-color: blue;
+  }
+\`;
+</code></pre>
+<p>- styled와 마찬가지로 백틱(``)을 이용하여 keyframes를 작성한다.</p>
 
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<pre><code>
+const Box = styled.div\`
+  width: 300px;
+  height: 300px;
+  background-color: green;
+  border-radius: 150px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  animation: ${move} 2s 1s infinite;
+\`;
+</pre></code>
+<p>- styled 안에서 변수를 이용하기 위해 ${변수이름} 형식으로 작성한다.</p>
+<p>- animation duration : 2s, 1s</p>
+<p>- animation-iteration-count: infinite</p>
