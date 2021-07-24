@@ -1,70 +1,34 @@
-# Getting Started with Create React App
+<h2>2주차 강의 : Styled Components 적용 예제</h2>
+<p>CSS-in-JS 라이브러리 중 하나인 Styled Components를 이용하여 React 컴포넌트를 스타일링한다.</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h3>styled-components 패키지 설치하기</h3>
+<pre><code>yarn add styled-components
+</code></pre>
 
-## Available Scripts
+<h3>App.js</h3>
+<pre><code>import styled from 'styled-components';
+const MyStyled = styled.div\`
+  width: 50vw;
+  min-height: 150px;
+  padding: 10px;
+  border-radius: 15px;
+  color: #fff;
+  &:hover{
+    background-color: #ddd;
+  }
+  background-color: ${(props) => (props.bgColor를 ? "red" : "purple")};
+\`;
+</code></pre>
+<p>- styled-components 패키지에서 styled 함수를 import하여 사용한다.</p>
+<p>- 백틱(`)을 이용하여 컴포넌트에 스타일을 작성한다.</p>
+<p>- SCSS와 마찬가지로 &로 자기 자신을 지칭할 수 있다.</p>
+<p>- ${} 형식으로 변수를 사용할 수 있다.</p>
+<p>- className을 지을 필요가 없고, 간단하고 직관적으로 스타일링을 할 수 있다.</p>
 
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<h3>실행 화면</h3>
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/75527311/126682265-d34484e4-f47e-4968-a49f-548ffa8a8a71.png" width="500">
+  <p>styled-components를 이용하여 지정한 스타일이 적용된 모습</p>
+  <img src="https://user-images.githubusercontent.com/75527311/126682337-89a5cb62-11bf-4803-aeb5-5c8d8caba52e.png" width="500">
+  <p>마우스 hover시 배경색이 바뀐다.</p>
+</div>
