@@ -17,6 +17,18 @@ const initialState = {
     },
     ranking: [
         {score: 40, name: '정예원', message: '안녕 르탄아!'},
+        {score: 40, name: '정예원', message: '안녕 르탄아!'},
+        {score: 40, name: '정예원', message: '안녕 르탄아!'},
+        {score: 40, name: '정예원', message: '안녕 르탄아!'},
+        {score: 40, name: '정예원', message: '안녕 르탄아!'},
+        {score: 40, name: '정예원', message: '안녕 르탄아!'},
+        {score: 40, name: '정예원', message: '안녕 르탄아!'},
+        {score: 40, name: '정예원', message: '안녕 르탄아!'},
+        {score: 40, name: '정예원', message: '안녕 르탄아!'},
+        {score: 40, name: '정예원', message: '안녕 르탄아!'},
+        {score: 40, name: '정예원', message: '안녕 르탄아!'},
+        {score: 40, name: '정예원', message: '안녕 르탄아!'},
+        {score: 40, name: '정예원', message: '안녕 르탄아!'},
     ],
 };
 
