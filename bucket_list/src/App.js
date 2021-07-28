@@ -10,7 +10,7 @@ import NotFound from './NotFound';
 import Progress from './Progress';
 
 import { connect } from 'react-redux';
-import { loadBucket, createBucket  } from './redux/modules/bucket';
+import { loadBucket, createBucket, loadBucketFB, addBucketFB } from './redux/modules/bucket';
 
 import {firestore} from './firebase';
 
@@ -23,11 +23,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return{
     load: () => {
-      dispatch(loadBucket());
+      dispatch(loadBucketFB());
     },
 
-    create: (bucket) => {
-      dispatch(createBucket(bucket));
+    create: (new_item) => {
+      dispatch(addBucketFB(new_item));
     }
   }
 }
@@ -44,38 +44,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const bucket = firestore.collection('buckets');
-    bucket.doc('bucket_item').set({text:'수영 배우기', completed:false});
-    // bucket.doc('bucket_item1').get().then((doc) => {
-    //   if(doc.exists){
-    //     console.log(doc);
-    //     console.log(doc.data());
-    //     console.log(doc.id);
-    //   }
-    //   console.log(doc.exists);
-    // });  //then:비동기 작업이 끝나고 수행할 것
-
-    // bucket.get().then(docs => {
-    //   let bucket_data = [];
-    //   docs.forEach((doc) => {
-    //     if(doc.exists){
-    //       bucket_data = [...bucket_data, {id: doc.id, ...doc.data()}];
-    //     }
-    //   });
-
-    //   console.log(bucket_data);
-    // });
-
-    // // bucket.add({text:'캘리그라피 배우기', completed: false}).then((docRef) => {
-    // //   console.log(docRef);
-    // //   console.log(docRef.id)
-    // // });
-
-    // // bucket.doc('bucket_item1').update({text: '수영 배우기2'});
-
-    // bucket.doc('bucket_item2').delete().then(docRef => {
-    //   console.log('지웠어요');
-    // });
+    this.props.load();
+    // const bucket = firestore.collection('buckets');
+    // bucket.doc('bucket_item').set({text:'수영 배우기', completed:false});
   }
 
   addBucketList = () => {
