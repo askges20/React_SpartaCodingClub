@@ -1,7 +1,7 @@
 import React from 'react';
 import img from './scc_img01.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { addRank } from './redux/modules/rank';
+import { addRank, addRankFB } from './redux/modules/rank';
 
 const Message = (props) => {
     const dispatch = useDispatch();
@@ -84,9 +84,12 @@ const Message = (props) => {
                     current: true,
                 };
                 // 랭킹 정보 넣기
-                dispatch(addRank(rank_info));
+                // dispatch(addRank(rank_info));
+                dispatch(addRankFB(rank_info));
                 // 주소 이동
-                props.history.push('/ranking');
+                window.setTimeout(() => { //시간차를 두고 이동
+                  props.history.push('/ranking');
+                }, 1000);
     
               }}
               style={{
