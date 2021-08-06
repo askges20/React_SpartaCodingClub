@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# 3주차 강의 : 라우팅 예제
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 라우팅
+- 브라우저 주소에 따라 다른 페이지를 보여주는 것
+- SPA에서 html은 딱 하나만 있지만 브라우저 주소창대로 다른 페이지를 보여줄 수 있음
+<br>
 
-## Available Scripts
+## 리액트에서 라우팅 처리하기
+- react-route-dom 패키지 설치하기
+```bash
+yarn add react-router-dom
+```
+- react-route-dom 공식 문서 : [https://reactrouter.com/web/guides/primary-components](https://reactrouter.com/web/guides/primary-components)
+<br>
 
-In the project directory, you can run:
+- index.js에 BrowserRouter 적용
+```jsx
+import ReactDOM from 'react-dom';
+import {BrowserRouter} from 'react-router-dom';
 
-### `yarn start`
+ReactDOM.render(
+	<BrowserRouter>
+		<App />
+	</BrowserRouter>
+	document.getElementById("root")
+);
+```
+- 세부 화면 만들기 (Home.js, Cat.js, Dog.js)
+- App.js에 Route, Link 적용하기
+```jsx
+<div className="App">
+	<div>
+		<Link to="/">Home으로 가기</Link>
+		<Link to="/cat/nabi">Cat으로 가기</Link>
+		<Link to="/dog">Dog으로 가기</Link>
+	</div>
+  <hr/>
+	<Route path="/" exact component={Home}/>
+	<Route exact path="/cat/:cat_name" component={Cat}/>
+	<Route path="/dog" component={Dog}/>
+</div>
+```
+- history 사용하기
+```jsx
+<button onClick={() => {
+	this.props.history.push("/cat");
+}}>
+	cat으로 가기
+</button>
+<button onClick={() => {
+	this.props.history.goBack();
+}}>뒤로가기</button>
+```
+<br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 실행 화면
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/75527311/128461132-b726669b-2705-41cc-86aa-aaec1663a0fa.PNG" width="350">
+  <p>[Home/Cat/Dog으로 가기] Link를 클릭하면 해당 페이지로 이동함</p>
+  <br>
+  
+  <img src="https://user-images.githubusercontent.com/75527311/128460727-07247e8b-9523-4219-8502-ad117e454e28.PNG" width="350">
+  <img src="https://user-images.githubusercontent.com/75527311/128460725-76ee40c2-d281-45b5-b907-a97148085cbe.PNG" width="350">
+  <p>각각 Cat, Dog 페이지로 이동한 모습, Cat 페이지에는 파라미터로 cat_name도 전달함</p>
+  <p>history를 이용한 뒤로가기 버튼을 클릭하면 이전 페이지로 이동함</p>
+</div>
