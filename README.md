@@ -6,7 +6,7 @@
 - 툴 : NPM, Yarn
 - 패키지 : styled-components, react-router-dom, redux, react-redux, firebase, redux-thunk ...
 - 데이터베이스 : Google Firebase Firestore
-- 배포 : AWS EC2, Google Firebase Hosting
+- 배포 : AWS S3 + Route 53, Google Firebase Hosting
 
 ## 주차 별 예제
 ### 1~5주차
@@ -35,3 +35,6 @@
 ### 4주차
 1. 키프레임 [(keyframes_ex)](./keyframes_ex)
 - Styled Components의 keyframes를 이용한 애니메이션 적용
+
+## 공부 기록
+[티스토리 블로그](https://askges20.tistory.com/category/%5B%EC%8A%A4%ED%8C%8C%EB%A5%B4%ED%83%80%EC%BD%94%EB%94%A9%ED%81%B4%EB%9F%BD%5D/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C%EC%9D%98%20%EA%BD%83%2C%20%EB%A6%AC%EC%95%A1%ED%8A%B8)
